@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automotive GenAI Visualizer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🏎️ Automotive Concept Visualizer</h1>
+            <p class="subtitle">Transform Your Design Ideas into Narratives and Images</p>
+        </header>
+
+        <main class="main-content">
+            <div class="input-section">
+                <div class="form-group">
+                    <label for="designPrompt">Design Concept Description</label>
+                    <textarea 
+                        id="designPrompt" 
+                        class="input-field" 
+                        placeholder="e.g., A futuristic electric hypercar with aggressive angular lines, sleek low profile, glowing neon accents, minimalist interior with holographic displays..."
+                        rows="5"
+                    ></textarea>
+                    <small class="help-text">Describe your automotive design concept in detail</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="contextInput">Additional Context (Optional)</label>
+                    <textarea 
+                        id="contextInput" 
+                        class="input-field" 
+                        placeholder="e.g., Year 2035, luxury segment, eco-friendly materials, inspired by nature..."
+                        rows="3"
+                    ></textarea>
+                    <small class="help-text">Provide additional context or constraints</small>
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="enhanceImage" class="checkbox">
+                        <span>Enhance generated image (upscale)</span>
+                    </label>
+                </div>
+
+                <div class="button-group">
+                    <button id="generateBtn" class="btn btn-primary" onclick="generateVisualization()">
+                        Generate Visualization
+                    </button>
+                    <button id="clearBtn" class="btn btn-secondary" onclick="clearForm()">
+                        Clear Form
+                    </button>
+                </div>
+            </div>
+
+            <div id="loadingSpinner" class="loading-spinner hidden">
+                <div class="spinner"></div>
+                <p>Generating your automotive concept...</p>
+            </div>
+
+            <div id="results" class="results-section hidden">
+                <div class="results-grid">
+                    <div class="narrative-panel">
+                        <h2>Design Narrative</h2>
+                        <div id="narrativeContent" class="narrative-content"></div>
+                        <div class="metadata">
+                            <p id="narrativeMetadata"></p>
+                        </div>
+                    </div>
+
+                    <div class="image-panel">
+                        <h2>Generated Visualization</h2>
+                        <div id="imageContainer" class="image-container">
+                            <img id="generatedImage" src="" alt="Generated automotive design" class="generated-image">
+                        </div>
+                        <div class="image-actions">
+                            <button class="btn btn-small" onclick="downloadImage()">Download Image</button>
+                            <button class="btn btn-small" onclick="copyImagePrompt()">Copy Image Prompt</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-prompt-section">
+                    <h3>Image Generation Prompt</h3>
+                    <textarea id="imagePromptContent" class="input-field" rows="3" readonly></textarea>
+                </div>
+
+                <div class="error-panel hidden" id="errorPanel">
+                    <h3>⚠️ Error</h3>
+                    <p id="errorContent"></p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Powered by OpenAI GPT-4 & DALL-E 3 | © 2024 Automotive GenAI</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
