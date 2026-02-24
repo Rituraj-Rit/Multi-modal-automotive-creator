@@ -1,0 +1,1 @@
+import base64\nprint(base64.b64encode(b" test\).decode())
