@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  automotive-genai:
+    build: .
+    container_name: automotive-genai-app
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - LLM_API_KEY=${LLM_API_KEY}
+      - IMAGE_API_KEY=${IMAGE_API_KEY}
+      - LLM_MODEL=gpt-4
+      - IMAGE_MODEL=dall-e-3
+      - IMAGE_QUALITY=hd
+      - IMAGE_SIZE=1024x1024
+    volumes:
+      - ./frontend:/app/frontend:ro
+      - ./src:/app/src:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - automotive-network
+
+networks:
+  automotive-network:
+    driver: bridge
